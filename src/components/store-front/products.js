@@ -31,6 +31,7 @@ const productsViewer = (props) => {
                     <CardHeader title={product.name} />
                     <CardContent>
                       <Typography variant="p" component="p"> ${product.price}</Typography>
+                      <Typography variant="p" component="p"> {product.description}</Typography>
                     </CardContent>
                     <CardActions>
                       <IconButton> Add to Cart </IconButton>
@@ -51,7 +52,7 @@ const productsViewer = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    products: state.products, activatedCategory: state.categories.activatedCategory
+    products: state.products, activatedCategory: state.categories.activatedCategory, activatedDescription: state.description
   }
 }
 
