@@ -4,24 +4,28 @@ import ToolBar from "@material-ui/core/Toolbar";
 import Button from '@material-ui/core/Button';
 import { StylesProvider } from '@material-ui/styles';
 import { makeStyles } from "@material-ui/core/styles";
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { connect } from 'react-redux';
+
 const useStyles = makeStyles({
   button: {
-    alignSelf: "right",
-    textAlign: "right",
+    alignSelf: "left",
+    textAlign: "left",
   },
 });
 
-export default function Header(props) {
+function Header(props) {
+  console.log('cart #: ', props.cart.cart.length);
   const styles = useStyles();
   return (
     <>
       <ToolBar className={styles.toolBar}>
 
-        <Grid container style={{ backgroundColor: 'lightBlue', padding: '0, 20px, 0, 20px' }}>
+        <Grid container style={{ backgroundColor: 'lightBlue' }}>
           <Grid item xs={4}>
             <h2>Thee Store</h2>
             <Grid item xs className={StylesProvider.button}>
-              <Button>Cart (0)</Button>
+              <Button><ShoppingCartIcon />Cart ({props.cart.cart.length})</Button>
             </Grid>
           </Grid>
         </Grid>
@@ -29,3 +33,11 @@ export default function Header(props) {
     </>
   )
 }
+
+const mapStateToProps = (state) => {
+  return {
+    cart: state.cart,
+  }
+}
+
+export default connect(mapStateToProps)(Header);
