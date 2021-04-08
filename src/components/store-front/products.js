@@ -14,15 +14,23 @@ import { connect } from 'react-redux';
 import { inactive, active } from '../../store/categories.js';
 import { getProducts } from '../../store/products.js';
 import { addToCart } from '../../store/cart.js';
+import { useEffect } from 'react';
+import { loadProducts } from '../../store/products.js';
 
-const productsViewer = (props) => {
+
+const ProductsViewer = (props) => {
+
+  useEffect(() => {
+    props.loadProducts();
+  }, []);
+
   return (
     <>
       <CategoryViewer />
       <Paper>
         <Grid container justify="center" spacing={5}>
           {props.products.productList.map((product, index) => {
-            if (product.category === props.activatedCategory) {
+            if (product.category === props.activatedCategory.toLowerCase()) {
 
               return (
                 <Grid item key={index}>
@@ -60,6 +68,7 @@ const mapDispatchToProps = {
   active,
   getProducts,
   addToCart,
+  loadProducts,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(productsViewer);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsViewer);
