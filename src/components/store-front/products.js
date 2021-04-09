@@ -22,7 +22,7 @@ const ProductsViewer = (props) => {
 
   useEffect(() => {
     props.loadProducts();
-  }, []);
+  });
 
   return (
     <>
